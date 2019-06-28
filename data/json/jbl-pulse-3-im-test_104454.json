@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "urlId": 104454,
+  "urlSlug": "jbl-pulse-3-im-test",
+  "headline": "JBL Pulse 3 im Test",
+  "subtitle": "Leuchtparty für unterwegs",
+  "introduction": "Der JBL Pulse 3 Bluetooth-Lautsprecher verfügt über eine integrierte Lichtshow und kommt auf eine adäquate Laufzeit von rund elf Stunden. Die insgesamt gute Soundqualität wird durch den vergleichsweise hohen Preis ein wenig gedämpft. Hier gibt es günstigere Lautsprecher mit besserem Sound. Im Großen und Ganzen konnten Qualität, Mobilität und Ausstattung des Bluetooth-Lautsprechers im Test jedoch überzeugen, weswegen sich das Gerät im oberen Feld unserer Bestenliste wiederfindet.",
+  "displayDate": {
+    "timestamp": 1550650548
+  },
+  "author": {
+    "id": 1,
+    "firstName": "CHIP",
+    "lastName": "Redaktion"
+  },
+  "image": {
+    "id": 1,
+    "height": 719,
+    "width": 1280,
+    "text": "JBL Pulse 3 im Test.",
+    "url": "https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg",
+    "source": "Bild: JBL"
+  },
+  "chapters": [
+    {
+      "id": 1,
+      "order": 1,
+      "headline": "JBL Pulse 3 im Test: Bluetooth-Lautsprecher mit Disco und vielen Extras",
+      "text": "Der JBL Pulse 3 bietet eine LED-Lichtshow, die sich der gespielten Musik anpasst und somit für die entsprechende Atmosphäre sorgt. Hinzu kommen eine Freisprechfunktion und ein Spritzwasserschutz. Auf diese Weise können Sie den Bluetooth-Lautsprecher auch mit ins Freie nehmen und müssen sich keine Sorgen über Regen oder verschüttete Gläser machen. Die Lautstärke lässt sich praktisch per App regeln und der Speaker lässt sich mit mehreren Geräten koppeln.",
+      "image": {}
+    },
+    {
+      "id": 2,
+      "order": 2,
+      "headline": "Solide Laufzeit des JBL Pulse 3: rund 11 Stunden Musikspaß",
+      "text": "Mit dem JBL Pulse&nbsp;3 erhalten Sie einen Bluetooth-Lautsprecher mit einer soliden Laufzeit von rund elf Stunden. Zum Aufladen benötigt der Lautsprecher fast vier Stunden und damit etwas mehr als viele vergleichbare Produkte.&nbsp;</p>\r\n\r\n<p>Im Lieferumfang enthalten sind sowohl ein Akku-LED als auch ein USB-Kabel samt Netzteil.",
+      "image": {
+        "id": 2,
+        "height": 719,
+        "width": 1280,
+        "text": "Farbenfroh: JBL Pulse 3.",
+        "url": "https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280_0.jpg",
+        "source": "Bild: JBL"
+      }
+    }
+  ]
+}
