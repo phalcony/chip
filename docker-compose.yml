@@ -22,7 +22,9 @@ services:
       - MYSQL_PASSWORD=ZF8WaFhf
 
   php_api:
-    build: phpdocker/php-fpm
+#    build: phpdocker/php-fpm
+#    build: dockerwest/php-symfony:7.2
+    image: dockerwest/php-symfony:7.2
     container_name: php_api
     working_dir: /var/www
     volumes:

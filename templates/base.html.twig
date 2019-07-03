@@ -2,11 +2,17 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('build/runtime.js') }}"></script>
+           {# <script src="{{ asset('/build/js/vendor.js') }}"></script> #}
+           {# <script src="{{ asset('build/js/app.js') }}"></script> #}
+           {# <script src="{{ asset('build/js/chip.js') }}"></script> #}
+        {% endblock %}
     </body>
 </html>

@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +48,28 @@ class Articles
      * @ORM\Column(type="datetime")
      */
     private $displayDate;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Authors", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Images", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Chapters", mappedBy="articles", cascade={"persist", "remove"})
+     */
+    private $chapter;
+
+    public function __construct()
+    {
+        $this->chapter = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -101,7 +126,7 @@ class Articles
 
     public function getIntroduction(): ?string
     {
-        return $this->introduction;
+        return $this->subtitle;
     }
 
     public function setIntroduction(string $introduction): self
@@ -122,4 +147,74 @@ class Articles
 
         return $this;
     }
+
+    public function getAuthor(): ?Authors
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(Authors $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getImage(): ?Images
+    {
+        return $this->image;
+    }
+
+    public function setImage(Images $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chapters[]
+     */
+    public function getChapter(): Collection
+    {
+        return $this->chapter;
+    }
+
+    public function addChapter(Chapters $chapter): self
+    {
+        if (!$this->chapter->contains($chapter)) {
+            $this->chapter[] = $chapter;
+            $chapter->setArticles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChapter(Chapters $chapter): self
+    {
+        if ($this->chapter->contains($chapter)) {
+            $this->chapter->removeElement($chapter);
+            // set the owning side to null (unless already changed)
+            if ($chapter->getArticles() === $this) {
+                $chapter->setArticles(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDisplayDateTimestamp(): int
+    {
+        if ($this->getDisplayDate()) {
+            return $this->getDisplayDate()->getTimestamp();
+        }
+        return 0;
+    }
+
+    public function setDisplayDateTimestamp(int $timestamp)
+    {
+        $this->displayDate = \DateTime::createFromFormat('U', $timestamp);
+        return $this;
+    }
+
 }

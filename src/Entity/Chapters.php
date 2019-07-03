@@ -31,6 +31,16 @@ class Chapters
      */
     private $text;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="chapter", cascade={"persist"})
+     */
+    private $articles;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Images", cascade={"persist", "remove"})
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,4 +81,36 @@ class Chapters
 
         return $this;
     }
+
+    public function getArticles(): ?Articles
+    {
+        return $this->articles;
+    }
+
+    public function setArticles(?Articles $articles): self
+    {
+        $this->articles = $articles;
+
+        return $this;
+    }
+
+    public function getImage(): ?Images
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Images $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+//    /**
+//     * @return string
+//     */
+//    public function __toString()
+//    {
+//        return 'sss';
+//    }
 }
