@@ -13,7 +13,3 @@ require('../scss/app.scss');
 // Open the Modal
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-
-function test2() {
-    alert('2');
-}

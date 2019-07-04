@@ -2,52 +2,153 @@ $bgcolor: #f8f9fa;
 $chipcolor: #eb443f;
 $textcolor: darkblue;
 $fontsize: 18px;
+//@media (min-width: 1200px) {
+//  .container {
+//    max-width: 982px;
+//  }
+//}
+//@media (min-width: 787px) {
+//  .container {
+//    max-width: 787px;
+//  }
+//}
+//@media (min-width: 450px) {
+//  .container {
+//    max-width: 450px;
+//  }
+//}
+
+@mixin container-size {
+
+  //@if $point == lg {
+  //  @media (min-width: 70em) { max-width: 982px }
+  //}
+  //@else if $point == md {
+  //  @media (min-width: 64em) { max-width: 787px }
+  //}
+  //@else if $point == xs {
+  //  @media (min-width: 50em) {  max-width: 450px }
+  //}
+  //@media (max-width: 37.5em) { @content ; }
+}
+
+@mixin important-text {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+}
+
+@mixin copyright-text {
+  padding: 0 5px 9px;
+  font-size: 12px;
+  color: #b1b1b1;
+}
+
+@mixin col-33{
+  width: 33.3333%;
+  position: relative;
+  float: left;
+}
+
+
 
 body {
-  background-color: $bgcolor;
+  background-color: red;
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+  width: 1200px;
+  //@include container-size;
+  background-color: #396c1b;
+ }
+
+.container .col-4 {
+  @include col-33;
+}
+
+.wrapper {
+  max-width: 450px;
+  box-sizing: border-box;
+  background-color: #718C00;
+  padding: 10px;
+  margin: 10px;
+  //border: 1px solid #6c6c6c;
+}
+
+.copyright {
+  @include copyright-text;
+  background-color: green;
+}
+
+.artikel-liste {
+  padding: 0px;
 }
 
 
-@mixin breakpoint($class) {
-  @if $class == xs {
+//div.wrapper > div {
+//  position: absolute;
+//  top: 0;
+//  bottom: 0;
+//  left: 0;
+//  right: 0;
+//  overflow: hidden;
+//}
 
-    @media (max-width: 767px) {
-      @content;
-    }
-  } @else if $class == sm {
-
-    @media (min-width: 768px) {
-      @content;
-    }
-  } @else if $class == md {
-
-    @media (min-width: 992px) {
-      @content;
-    }
-  } @else if $class == lg {
-
-    @media (min-width: 1200px) {
-      @content;
-    }
-  } @else {
-
-    @warn "Breakpoint mixin supports: xs, sm, md, lg";
-  }
+img {
+  vertical-align: middle;
+  border: 0px;
+  width: 100%;
 }
 
 
-aside.primary {
-  float: right;
-  //width: 100%;
-  @include breakpoint(sm) {
-    float: none;
-    width: 350px;
-    background-color: $chipcolor;
-  }
-  .thumbnail {
-    max-width: 200px;
-    height: auto;
-  }
+figcaption {
+  padding: 0.4em 0 0 0;
+  line-height: 1.4;
+  font-size: 15px * 0.2;
+  color: #6c6c6c;
+}
+
+.thumbnail .copyright {
+  padding: 0 5px 0px;
+}
+
+.thumbnail header {
+  padding: 0px;
+}
+
+
+.text-right {
+  text-align: right;
+}
+
+
+h1 .small {
+  display: block;
+  color: #000000;
+  margin-bottom: 0.5em;
+  font-size: 65%;
+}
+
+.block-with-text {
+  color: #555555;
+  padding: 0px 3px;
+}
+
+p {
+  margin: 0px 7px 11px 7px;
+}
+
+article .thumbnail {
+  max-height: 450px;
+  max-width: 450px;
+  padding: 0;
+  margin: 0 0 1.5em 0;
+  border-radius: 0;
+  border: #dbdbdb solid 1px;
+  transition: all .15s linear;
 }
 
 .row > .column {
@@ -66,7 +167,7 @@ aside.primary {
   width: 25%;
 }
 
-.column .thumbnail img{
+.column .thumbnail img {
   float: left;
   max-width: 200px;
   height: auto;

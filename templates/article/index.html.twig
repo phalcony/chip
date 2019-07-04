@@ -15,44 +15,47 @@
         </div>
     {% else %}
         {#        {{ dump(articles) }}#}
-        {% for article in articles %}
-            <div>
-                <aside class="primary md">
+        <div class="container">
+            <section class="artikel-liste">
+                {% for article in articles %}
+                    <article class="col-4">
+                        <div class="wrapper">
+                            {#                    <a href="#">#}
+                            <figure>
 
-                    <ul>
-                        <li>{{ article.urlId }} </li>
-                        <li>{{ article.urlSlug }} </li>
-                        <li>{{ article.headline }} </li>
-                        <li>{{ article.subtitle }} </li>
-                        <li>{{ article.author.firstName }} </li>
-                        <div class="row">
-                            <div class="colum">
-                                <img src="{{ article.image.url }}" onclick="test2();" class="thumbnail hover-shadow">
-                            </div>
+                                <div>
+                                    <img src="{{ article.image.url }}" id="zoomImage" class="thumbnail hover-shadow">
+                                </div>
+                            </figure>
+                            <figcaption>
+                                <div class="copyright">
+                                    © {{ article.author.firstName ~ article.author.lastName }}
+                                </div>
+                            </figcaption>
+                            <header>
+                                <h1>
+                                    <a></a>
+                                    <span class="small">{{ article.subtitle }}</span>
+                                    <span>{{ article.headline }}</span>
+                                </h1>
+                            </header>
+                            <p class="block-with-text">
+                                {{ article.introduction }}
+                            </p>
                         </div>
-{#                        <li><img src="{{ article.image.url }}"></li>#}
-                        {#               <li>{{ dump(article.chapter) }} </li>#}
-                        {% for relatedArticle in article.chapter %}
-                            {{ relatedArticle.id }}
-                        {% endfor %}
-                    </ul>
-                </aside>
-            </div>
-        {% endfor %}
+                    </article>
+                {% endfor %}
+            </section>
+        </div>
     {% endif %}
 
     <div id="myModal" class="modal">
-        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <span class="close cursor" id="closeImage">&times;</span>
         <div class="modal-content">
-
             <div class="mySlides">
                 <div class="numbertext">1 / 4</div>
                 <img src="https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg" style="width:100%">
             </div>
-
-
-
-
             <!-- Caption text -->
             <div class="caption-container">
                 <p id="caption"></p>
@@ -60,15 +63,33 @@
 
             <!-- Thumbnail image controls -->
             <div class="column">
-                <img class="demo" src="https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg" onclick="currentSlide(1)" alt="Nature">
+                <img class="demo" src="https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg"
+                     onclick="currentSlide(1)" alt="Nature">
             </div>
 
         </div>
     </div>
     {% block javascripts %}
-{#        {{ parent() }}#}
-{#        <script src="{{ asset('build/vendors~app~js/app.js') }}"></script>#}
-{#        <script src="{{ asset('/build/js/chip.js') }}" defer></script>#}
-{#        <script src="{{ asset('/build/js/app.js') }}" defer></script>#}
+        {{ parent() }}
+        <script src="{{ asset('/build/js/chip.js') }}" defer></script>
+        <script src="{{ asset('/build/js/app.js') }}" defer></script>
     {% endblock %}
 {% endblock %}
+
+                        {#                        <div class="thumbnail">#}
+                        {#                            <li>{{ article.urlId }} </li>#}
+                        {#                            <li>{{ article.urlSlug }} </li>#}
+                        {#                            <li>{{ article.headline }} </li>#}
+                        {#                            <li>{{ article.subtitle }} </li>#}
+                        {#                            <li>{{ article.author.firstName }} </li>#}
+                        {#                            <div class="row">#}
+                        {#                                <div class="colum">#}
+
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        <li><img src="{{ article.image.url }}"></li>#}
+                        {#               <li>{{ dump(article.chapter) }} </li>#}
+                        {#                            {% for relatedArticle in article.chapter %}#}
+                        {#                                {{ relatedArticle.id }}#}
+                        {#                            {% endfor %}#}
+{#                    </a>#}
