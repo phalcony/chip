@@ -4,92 +4,83 @@
 
 {% block body %}
 
-    {% if articles is empty %}
+    {% include 'default/flashMessages.html.twig' %}
+
+    {% set maxCharLength = 160 %}
+    <div class="container">
+        {% if articles is empty %}
         <div class="row mt-5">
-            <div class="col col-12 text-center">
-                <p class="lead">There is
-                    <ins>no</ins>
-                    articles, import one!
+            <div class="no-article">
+                <p class="text-center">
+                    <span>{{ 'no_article_import'|trans }}</span>
+                    <a href="{{ path('upload') }}" class="previous">{{ 'back_to_upload'|trans }}</a>
                 </p>
             </div>
         </div>
-    {% else %}
-        {#        {{ dump(articles) }}#}
-        <div class="container">
-            <section class="artikel-liste">
-                {% for article in articles %}
-                    <article class="col-4">
-                        <div class="wrapper">
-                            {#                    <a href="#">#}
-                            <figure>
+        {% else %}
 
-                                <div>
-                                    <img src="{{ article.image.url }}" id="zoomImage" class="thumbnail hover-shadow">
-                                </div>
-                            </figure>
+        <div class="row">
+            <div class="upload-area">
+                <a href="{{ path('upload') }}" class="previous">{{ 'back_to_upload'|trans }}</a>
+            </div>
+            {% for article in articles %}
+                <div class="column">
+                    <div class="card">
+                        <figure>
+                            <div class="wrapper">
+                                <img src="{{ article.image.url }}" class="thumbnail zoomImage"
+                                     data-iamgeurl="{{ article.image.url }}"
+                                     data-caption="{{ article.image.source }}">
+                            </div>
                             <figcaption>
                                 <div class="copyright">
                                     © {{ article.author.firstName ~ article.author.lastName }}
                                 </div>
                             </figcaption>
+                        </figure>
+                        <div class="article-text">
                             <header>
-                                <h1>
-                                    <a></a>
+                                <h3>
                                     <span class="small">{{ article.subtitle }}</span>
-                                    <span>{{ article.headline }}</span>
-                                </h1>
+                                    <br>
+                                    <a href="{{ path('article_details', {'id': article.id, 'slug': article.urlSlug}) }}">
+                                        <span>{{ article.headline }}</span>
+                                    </a>
+                                </h3>
                             </header>
-                            <p class="block-with-text">
-                                {{ article.introduction }}
-                            </p>
+                            <a href="{{ path('article_details', {'id': article.id, 'slug': article.urlSlug}) }}">
+                                <p class="block-with-text">
+                                    {% if article.introduction|length > maxCharLength %}
+                                        {{ article.introduction|slice(0, maxCharLength) ~ ' ...' }}
+                                    {% else %}
+                                        {{ article.introduction }}
+                                    {% endif %}
+                                </p>
+                            </a>
                         </div>
-                    </article>
-                {% endfor %}
-            </section>
+                        <footer>
+                            <span class="small">{{ article.displayDate.date | localizeddate('full', 'none') }}</span>
+                        </footer>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endif %}
+    </div>
 
     <div id="myModal" class="modal">
         <span class="close cursor" id="closeImage">&times;</span>
         <div class="modal-content">
-            <div class="mySlides">
-                <div class="numbertext">1 / 4</div>
-                <img src="https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg" style="width:100%">
-            </div>
+            <img id="modalImage" src="" style="width:100%">
             <!-- Caption text -->
             <div class="caption-container">
                 <p id="caption"></p>
             </div>
-
-            <!-- Thumbnail image controls -->
-            <div class="column">
-                <img class="demo" src="https://praxistipps.s3.amazonaws.com/2019-02/jbl_pulse_3_1280.jpg"
-                     onclick="currentSlide(1)" alt="Nature">
-            </div>
-
         </div>
     </div>
+    {% endif %}
     {% block javascripts %}
         {{ parent() }}
         <script src="{{ asset('/build/js/chip.js') }}" defer></script>
         <script src="{{ asset('/build/js/app.js') }}" defer></script>
     {% endblock %}
 {% endblock %}
-
-                        {#                        <div class="thumbnail">#}
-                        {#                            <li>{{ article.urlId }} </li>#}
-                        {#                            <li>{{ article.urlSlug }} </li>#}
-                        {#                            <li>{{ article.headline }} </li>#}
-                        {#                            <li>{{ article.subtitle }} </li>#}
-                        {#                            <li>{{ article.author.firstName }} </li>#}
-                        {#                            <div class="row">#}
-                        {#                                <div class="colum">#}
-
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        <li><img src="{{ article.image.url }}"></li>#}
-                        {#               <li>{{ dump(article.chapter) }} </li>#}
-                        {#                            {% for relatedArticle in article.chapter %}#}
-                        {#                                {{ relatedArticle.id }}#}
-                        {#                            {% endfor %}#}
-{#                    </a>#}

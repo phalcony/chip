@@ -126,7 +126,7 @@ class Articles
 
     public function getIntroduction(): ?string
     {
-        return $this->subtitle;
+        return $this->introduction;
     }
 
     public function setIntroduction(string $introduction): self

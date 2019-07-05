@@ -1,180 +1,20 @@
+$whitecolor: #fff;
 $bgcolor: #f8f9fa;
-$chipcolor: #eb443f;
-$textcolor: darkblue;
+$linkcolor: #eb443f;
+$linkhover: #a00013;
+$textcolor: #555555;
+$overlaycolor: #737373;
+$errorcolor: #dc3545;
+$successcolor: #155724;
 $fontsize: 18px;
-//@media (min-width: 1200px) {
-//  .container {
-//    max-width: 982px;
-//  }
-//}
-//@media (min-width: 787px) {
-//  .container {
-//    max-width: 787px;
-//  }
-//}
-//@media (min-width: 450px) {
-//  .container {
-//    max-width: 450px;
-//  }
-//}
 
-@mixin container-size {
-
-  //@if $point == lg {
-  //  @media (min-width: 70em) { max-width: 982px }
-  //}
-  //@else if $point == md {
-  //  @media (min-width: 64em) { max-width: 787px }
-  //}
-  //@else if $point == xs {
-  //  @media (min-width: 50em) {  max-width: 450px }
-  //}
-  //@media (max-width: 37.5em) { @content ; }
-}
-
-@mixin important-text {
-  color: red;
-  font-size: 25px;
-  font-weight: bold;
-  border: 1px solid blue;
-}
 
 @mixin copyright-text {
-  padding: 0 5px 9px;
   font-size: 12px;
   color: #b1b1b1;
 }
 
-@mixin col-33{
-  width: 33.3333%;
-  position: relative;
-  float: left;
-}
-
-
-
-body {
-  background-color: red;
-  text-align: center;
-}
-
-.container {
-  text-align: center;
-  width: 1200px;
-  //@include container-size;
-  background-color: #396c1b;
- }
-
-.container .col-4 {
-  @include col-33;
-}
-
-.wrapper {
-  max-width: 450px;
-  box-sizing: border-box;
-  background-color: #718C00;
-  padding: 10px;
-  margin: 10px;
-  //border: 1px solid #6c6c6c;
-}
-
-.copyright {
-  @include copyright-text;
-  background-color: green;
-}
-
-.artikel-liste {
-  padding: 0px;
-}
-
-
-//div.wrapper > div {
-//  position: absolute;
-//  top: 0;
-//  bottom: 0;
-//  left: 0;
-//  right: 0;
-//  overflow: hidden;
-//}
-
-img {
-  vertical-align: middle;
-  border: 0px;
-  width: 100%;
-}
-
-
-figcaption {
-  padding: 0.4em 0 0 0;
-  line-height: 1.4;
-  font-size: 15px * 0.2;
-  color: #6c6c6c;
-}
-
-.thumbnail .copyright {
-  padding: 0 5px 0px;
-}
-
-.thumbnail header {
-  padding: 0px;
-}
-
-
-.text-right {
-  text-align: right;
-}
-
-
-h1 .small {
-  display: block;
-  color: #000000;
-  margin-bottom: 0.5em;
-  font-size: 65%;
-}
-
-.block-with-text {
-  color: #555555;
-  padding: 0px 3px;
-}
-
-p {
-  margin: 0px 7px 11px 7px;
-}
-
-article .thumbnail {
-  max-height: 450px;
-  max-width: 450px;
-  padding: 0;
-  margin: 0 0 1.5em 0;
-  border-radius: 0;
-  border: #dbdbdb solid 1px;
-  transition: all .15s linear;
-}
-
-.row > .column {
-  padding: 0 8px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Create four equal columns that floats next to eachother */
-.column {
-  float: left;
-  width: 25%;
-}
-
-.column .thumbnail img {
-  float: left;
-  max-width: 200px;
-  height: auto;
-}
-
-/* The Modal (background) */
-.modal {
+@mixin modal-window {
   display: none;
   position: fixed;
   z-index: 1;
@@ -184,7 +24,173 @@ article .thumbnail {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: black;
+  background-color: $overlaycolor;
+}
+
+@mixin close-btn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+@mixin btn {
+  padding: 5px 15px;
+  margin: 0px 15px;
+  background-color: $linkcolor;
+  color: $whitecolor;
+}
+
+@mixin article-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #f1f1f1;
+  min-height: 28em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 33.333%;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  @include article-card;
+}
+
+
+/* Responsive columns */
+@media only screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* Responsive columns */
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .column {
+    width: 50%;
+    display: block;
+  }
+}
+
+///* Responsive columns */
+//@media  only screen and (min-width: 800px) and (max-width: 1200px) {
+//  .card{
+//    min-height: 27.5em;
+//  }
+//}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+
+.thumbnail {
+  max-width: 100%;
+}
+
+
+.container {
+  padding: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: $bgcolor;
+}
+
+figure {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  padding: 10px;
+  color: $linkcolor;
+}
+
+h3 {
+  margin: 0px;
+}
+
+.article-text {
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.article-text p {
+  color: $textcolor;
+  padding-bottom: 5px;
+}
+
+.article-details {
+  padding: 15px;
+}
+
+.article-details p {
+  color: $textcolor;
+}
+
+
+header {
+  line-height: 1.2em;
+  margin-top: 0.3em;
+}
+
+footer {
+  text-align: left;
+  padding: 10px 15px 5px 15px
+}
+
+a {
+  color: $linkcolor;
+  text-decoration: none;
+  cursor: pointer !important;
+}
+
+a:hover {
+  color: $linkhover;
+}
+
+
+.small {
+  display: block;
+  color: #000000;
+  font-size: 70%;
+  font-weight: normal;
+}
+
+.copyright {
+  @include copyright-text;
+  padding: 0px 5px;
+  text-align: right;
+}
+
+/* The Modal (background) */
+.modal {
+  @include modal-window;
 }
 
 /* Modal Content */
@@ -199,12 +205,8 @@ article .thumbnail {
 
 /* The Close Button */
 .close {
-  color: white;
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 35px;
-  font-weight: bold;
+  @include close-btn;
+  color: $whitecolor;
 }
 
 .close:hover,
@@ -214,71 +216,184 @@ article .thumbnail {
   cursor: pointer;
 }
 
-/* Hide the slides by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
 /* Caption text */
 .caption-container {
   text-align: center;
-  background-color: black;
+  background-color: $linkcolor;
   padding: 2px 16px;
   color: white;
 }
 
-img.demo {
-  opacity: 0.6;
+.text-right {
+  text-align: right;
 }
 
-.active,
-.demo:hover {
-  opacity: 1;
+.text-left {
+  text-align: left;
 }
 
-img.hover-shadow {
-  transition: 0.3s;
+
+.wrapper {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
 
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.article-details .wrapper img {
+  width: 100%;
+  margin: 10px 0px;
+  border: 1px solid $overlaycolor;
+}
+
+.previous {
+  @include btn;
+}
+
+.placeholder {
+  width: 100%;
+  height: 212px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("https://dummyimage.com/370x207/fff/aaa");
+}
+
+.related-article-text {
+  text-align: left;
+  padding: 15px;
+  color: $textcolor;
+}
+
+.article-head {
+  width: 100%;
+}
+
+.left-span {
+  margin: 0px;
+  float: left;
+}
+
+.right-span {
+  margin: 0px;
+  float: right;
+}
+
+.article-headline {
+  float: left;
+  clear: both;
+}
+
+.upload-from {
+  max-width: 50%;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.related-articles {
+  .card {
+    min-height: 25em;
+
+    header {
+      text-align: left;
+      padding: 10px 15px;
+    }
+  }
+
+  h3 span {
+    color: $linkcolor;
+  }
+}
+
+.upload-file {
+  @include btn;
+  background-color: $overlaycolor;
+  width: 100%;
+  float: left;
+  padding: 5px;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-muted {
+  color: $overlaycolor;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.no-article {
+  width: 100%;
+}
+
+.upload-area {
+  width: 100%;
+  margin: 10px 0px;
+
+  h3 {
+    color: $linkcolor;
+  }
+
+  .upload-btn {
+    @include btn;
+    float: left;
+    padding: 3px 35px;
+    margin-top: 3px;
+    border: 0;
+  }
+}
+
+form .upload-from ul li {
+  text-decoration: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 90%;
+  color: $linkcolor;
+}
+
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-success {
+  color: $successcolor;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.75rem 1.25rem;
+  color: inherit;
+}
+
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  appearance: none;
+}
+
+.close {
+  float: right;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 0.8;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
+.close:hover{
+  background-color: $successcolor;
 }

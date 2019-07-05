@@ -1,0 +1,37 @@
+user:
+  success_create: A new user has been created successfully
+  success_edit: The new user has been updated successfully
+  success_delete: The user has been deleted successfully
+  error_create: There is a problem by creating new user
+  error_delete: There is a problem by deleting user's image
+
+given_name_required: Given Name *
+given_name: Given Name
+family_name_required: Family Name *
+family_name: Family Name
+email_required: Email *
+email: Email
+image: Image
+image_path: Image Path
+created_date_required: Create Date *
+created_date: Create Date
+id: ID
+
+create_new_user: Create new user
+back_to_list: Back to list
+required: Required
+he_test_task: Holiday Extras Coding Test
+build_api_test: Build API Test
+all_users: All users
+show_user: Show user
+full_name: 'Full name:'
+email_collon: 'Email:'
+created_date_collon: 'Created date:'
+delete_user: Delete user
+edit_user: Edit user
+user_details: User details
+update_user: Update User
+
+all_required_fields: All required fields MUST be provided
+no_user_found_for_id: 'No user found for given user ID '
+no_user_found: No user found

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\UploadType;
+use App\Util\FeedbackFlashMessage;
+use App\Util\FeedbackMessages;
 use App\Util\JsonUploadService;
 use App\Util\JsonValidationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,13 +37,14 @@ class UploadController extends AbstractController
                 $data = file_get_contents($file);
                 $result = $uploadService->insertIntoDb($data);
                 if ($result === true) {
-                   return $this->redirectToRoute('article');
+                    $this->addFlash('success', FeedbackMessages::JSON_IMPORT_SUCCESS);
+                   return $this->redirectToRoute('articles');
                 }
             } else {
                 dd($result);
             }
 //
-          return $this->redirectToRoute('article');
+          return $this->redirectToRoute('articles');
 
 //            var_dump();
 //            dd($result);

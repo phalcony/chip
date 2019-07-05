@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+
+    {% set maxCharLength = 160 %}
+    {% if article is empty %}
+        <div class="row mt-5">
+            <div class="col col-12 text-center">
+                <p class="lead">There is
+                    <ins>no</ins>
+                    articles, import one!
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <a href="{{ path('articles')}}" class="previous">&laquo; {{ 'back_to_articles'|trans }}</a>
+            <div class="article-details">
+                <h3>
+                    <div class="article-head">
+                        <span class="small left-span">{{ article.subtitle }}</span>
+                        <span class="small right-span">{{ article.displayDate.date | localizeddate('full', 'none') }}</span>
+                    </div>
+                    <span class="article-headline">{{ article.headline }}</span>
+                </h3>
+                <figure>
+                    <div class="wrapper">
+                        <img src="{{ article.image.url }}" class="zoomImage"
+                             data-iamgeurl="{{ article.image.url }}"
+                             data-caption="{{ article.image.source }}">
+                    </div>
+                    <figcaption>
+                        <div class="copyright">
+                            © {{ article.author.firstName ~ article.author.lastName }}
+                        </div>
+                    </figcaption>
+                </figure>
+                <p class="block-with-text">
+                    {{ article.introduction }}
+                </p>
+            </div>
+            <div class="related-articles">
+                <h1>Zum Thema</h1>
+                <div class="row">
+                    {% for relatedArticle in article.chapter %}
+                        <div class="column">
+                            <div class="card">
+                                <figure>
+                                    {% if relatedArticle.image.url is defined and relatedArticle.image.url is not null %}
+                                        <img src="{{ relatedArticle.image.url }}" class="thumbnail">
+                                    {% else %}
+                                        <div class="placeholder">
+                                        </div>
+                                    {% endif %}
+                                </figure>
+                                <header>
+                                    <h3>
+                                        <span>{{ relatedArticle.headline }}</span>
+                                    </h3>
+                                </header>
+                                <p class="related-article-text">
+                                    {% if relatedArticle.text|length > maxCharLength %}
+                                        {{ relatedArticle.text|slice(0, maxCharLength) ~ ' ...' }}
+                                    {% else %}
+                                        {{ relatedArticle.text }}
+                                    {% endif %}
+                                </p>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div id="myModal" class="modal">
+                <span class="close cursor" id="closeImage">&times;</span>
+                <div class="modal-content">
+                    <img id="modalImage" src="" style="width:100%">
+                    <!-- Caption text -->
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('/build/js/chip.js') }}" defer></script>
+        <script src="{{ asset('/build/js/app.js') }}" defer></script>
+    {% endblock %}
+{% endblock %}
