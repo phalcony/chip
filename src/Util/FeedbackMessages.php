@@ -22,9 +22,4 @@ class FeedbackMessages
     const NAN_INF_ERR = 'Ein oder mehrere NAN- oder INF-Werte im zu codierenden Wert';
     const CAN_NOT_ENCODE = 'Es wurde ein Wert eines Typs angegeben, der nicht codiert werden kann';
     const UNKNOWN_ERR = 'Ein unbekannter JSON-Fehler ist aufgetreten';
-
-    const JSON_IMPORT_SUCCESS = 'Die JSON-Datei wurde erfolgreich in die Datenbank importiert';
-
-
-
 }

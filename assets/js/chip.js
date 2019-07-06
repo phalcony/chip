@@ -1,29 +1,24 @@
 module.exports = {
     init: function () {
 
-        //module.exports = {
-
+        //Bind action to view elements
         $('.zoomImage').click(function () {
             let imageUrl = $(this).data('iamgeurl');
             let imageCaption = $(this).data('caption');
-            console.log(imageUrl);
-            console.log(imageCaption);
-            // $("#myModal image > src").val(imageUrl);
+
             $("#modalImage").attr("src", imageUrl);
             $("#caption").html('Quelle: ' + imageCaption);
-            document.getElementById("myModal").style.display = "block";
-
-
+            $("#myModal").css("display", "block");
         });
 
         // Close the Modal
         $('#closeImage').click(function () {
-            document.getElementById("myModal").style.display = "none";
+            $("#myModal").css("display", "none");
         });
 
         $('.close').click(function () {
-            document.getElementById("successMsg").style.display = "none";
-            document.getElementById("errorMsg").style.display = "none";
+            $("#successMsg").css("display", "none");
+            $("#errorMsg").css("display", "none");
         });
     }
 }

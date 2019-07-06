@@ -14,21 +14,22 @@
                 {{ form_row(form.file) }}
 
                 {{ form_row(form.save) }}
-{#                <span class="right-span">#}
-                    <div class="text-right">
-                        <small class="text-muted">
-                            {{ 'file_size'|trans }} <span class="font-bold">max 10MB</span>,
-                            {{ 'file_format'|trans }} <span class="font-bold">json</span>
-                        </small>
-                    </div>
-{#                </span>#}
-
-
+                <div class="text-right">
+                    <small class="text-muted">
+                        {{ 'file_size'|trans }} <span class="font-bold">max 10MB</span>,
+                        {{ 'file_format'|trans }} <span class="font-bold">json</span>
+                    </small>
+                </div>
             </div>
             <div class="form-error-message">
-            {{ form_errors(form) }}
+                {{ form_errors(form) }}
             </div>
             {{ form_end(form) }}
         </div>
     </div>
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('/build/js/chip.js') }}" defer></script>
+        <script src="{{ asset('/build/js/app.js') }}" defer></script>
+    {% endblock %}
 {% endblock %}

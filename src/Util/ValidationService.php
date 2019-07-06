@@ -8,10 +8,10 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class JsonValidationService
+ * Class ValidationService
  * @package App\Util
  */
-class JsonValidationService
+class ValidationService
 {
 
     /**
@@ -29,7 +29,7 @@ class JsonValidationService
     private $logger;
 
     /**
-     * JsonValidationService constructor.
+     * ValidationService constructor.
      *
      * @param LoggerInterface $logger
      */
@@ -47,12 +47,25 @@ class JsonValidationService
     {
         try {
 
-            if ($this->checkExtension($file) && $this->checkEncoding($file)) {
-                return $this->validateJson($file);
+            if ($this->checkExtension($file)) {
+
+                if ($this->checkEncoding($file)) {
+
+                    return $this->validateJson($file);
+                } else {
+
+                    return FeedbackMessages::WRONG_ENCODING;
+                }
+
+            } else {
+
+                return FeedbackMessages::WRONG_DATA_TYPE;
             }
 
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
+
+            return $e->getMessage();
         }
 
         return false;
@@ -85,7 +98,7 @@ class JsonValidationService
     private function checkEncoding(UploadedFile $file): bool
     {
         if (!mb_check_encoding(file_get_contents($file), self::ENCODING)) {
-            $this->logger->error(FeedbackMessages::WRONG_DATA_TYPE);
+            $this->logger->error(FeedbackMessages::WRONG_ENCODING);
 
             return false;
         }

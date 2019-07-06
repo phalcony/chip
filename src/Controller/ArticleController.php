@@ -3,13 +3,34 @@
 namespace App\Controller;
 
 use App\Repository\ArticlesRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Class ArticleController
+ * @package App\Controller
+ */
 class ArticleController extends AbstractController
 {
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * ArticleController constructor.
+     *
+     * @param LoggerInterface $logger
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/articles", name="articles")
      * @param ArticlesRepository $articlesRepository
@@ -18,14 +39,21 @@ class ArticleController extends AbstractController
      */
     public function index(ArticlesRepository $articlesRepository)
     {
-        $articles = $articlesRepository->findAll();
+        $articles = [];
+        try {
+            $articles = $articlesRepository->findAll();
+
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
+
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
     }
 
     /**
-     * Artikel-Seite.
+     * Article details
      *
      * @Route(
      *     "article/{slug}-{id}.html",
@@ -43,21 +71,16 @@ class ArticleController extends AbstractController
      */
     public function indexAction($id, ArticlesRepository $articlesRepository, TranslatorInterface $translator)
     {
+        $article = [];
         try {
-            $test = $translator->trans('given_name_required');
             $article = $articlesRepository->find($id);
 
-        } catch (\HttpResponseException $e) {
-//            if (404 == $e->getCode()) {
-//                throw new NotFoundHttpException(null, null, 1486716273);
-//            } else {
-//                throw $e;
-//            }
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
         }
 
         return $this->render('article/articleDetails.html.twig', [
             'article' => $article,
-            'test' => $test,
         ]);
     }
 }

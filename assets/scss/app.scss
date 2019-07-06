@@ -204,13 +204,13 @@ a:hover {
 }
 
 /* The Close Button */
-.close {
+.close-modal {
   @include close-btn;
   color: $whitecolor;
 }
 
-.close:hover,
-.close:focus {
+.close-modal:hover,
+.close-modal:focus {
   color: #999;
   text-decoration: none;
   cursor: pointer;
@@ -366,6 +366,12 @@ form .upload-from ul li {
   border-color: #c3e6cb;
 }
 
+.alert-danger {
+  color: $linkhover;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
 .fade {
   transition: opacity 0.15s linear;
 }
@@ -396,4 +402,8 @@ button.close {
 }
 .close:hover{
   background-color: $successcolor;
+}
+
+.close:hover{
+  background-color: $errorcolor;
 }
